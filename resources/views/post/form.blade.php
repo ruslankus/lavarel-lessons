@@ -7,15 +7,11 @@
         <div class="alert alert-info">{{ Session::get('message') }}</div>
     @endif
 
-@include('post._nav')
+    @include('post._nav')
 
-<section id="list">
-    <h3>Main</h3>
-    <div>
-
-    </div>
-
+<section id="form">
+    {!! Form::open(['route' => 'post.store'])  !!}
+        @include('post._form')
+    {!! Form::close() !!}
 </section>
-
-
 @stop

@@ -14,3 +14,7 @@
 //Route::get('/', 'PostController@index' );
 
 get('/',['as' => 'post','uses' =>"PostController@index"]);
+
+//get('/create',['as' => 'post','uses' =>"PostController@create"]);
+
+$router->resource('post','PostController');
