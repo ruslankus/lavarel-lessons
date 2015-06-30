@@ -22,7 +22,7 @@
     <tr>
         <td>City</td>
         <td>
-            {!! Form::select('city', $citySelect);!!}</td>
+            {!! Form::select('city', $citySelect, ['class' => 'form-control']);!!}</td>
     </tr>
 
     <tr>

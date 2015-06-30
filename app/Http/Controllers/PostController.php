@@ -24,7 +24,11 @@ class PostController extends Controller
     public function index()
     {
 
-        return view('post.index');
+        $post = Post::latest('id')->limit(1)->get()->shift();
+
+        //dd($post);
+
+        return view('post.index', ['post' => $post]);
     }
 
     /**
@@ -63,7 +67,7 @@ class PostController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'mail' => 'required',
+            'mail' => 'required|email',
             'content' => 'required'
         ]);
 
@@ -118,8 +122,8 @@ class PostController extends Controller
      */
     public function show()
     {
-        $posts = Post::all();
-        //$posts = Post::latest('id')->get();
+        //$posts = Post::all();
+        $posts = Post::latest('id')->paginate(2);
         //$posts = DB::table('posts')->paginate(2);
         return view('post.list', array('posts' => $posts));
     }

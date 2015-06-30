@@ -7,7 +7,7 @@
         <div class="alert alert-info">{{ Session::get('message') }}</div>
     @endif
     @include('post._nav')
-<section id="list">
+<section id="list" class="container">
     <h3>Feedback list</h3>
     <div class="list">
 
@@ -26,7 +26,7 @@
 
     </div>
     <div>
-        <?php //echo $posts->render(); ?>
+        <?php echo $posts->render(); ?>
     </div>
 </section>
 
