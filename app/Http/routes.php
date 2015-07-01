@@ -11,12 +11,29 @@
 |
 */
 
+
+function boot(Router $router)
+{
+    $router->pattern('id', '[0-9]+');
+
+    parent::boot($router);
+}
+
 //Route::get('/', 'PostController@index' );
 
-get('/',['as' => 'post','uses' =>"PostController@index"]);
+get('/',['as' => 'post_main','uses' =>"PostController@index"]);
 
-get('/post/edit/{id}',['as' => 'post','uses' =>"PostController@edit"]);
+get('/post/edit/{id}',['as' => 'post.edit','uses' =>"PostController@edit"]);
+
+Route::group(['prefix' => 'en'], function () {
+    Route::resource('post','PostController');
+});
 
 
 
-Route::resource('post','PostController');
+Route::get('user/{id}', function ($id) {
+
+})->where('id', '[0-9]+');
+
+//Route::resource('post','PostController');
+

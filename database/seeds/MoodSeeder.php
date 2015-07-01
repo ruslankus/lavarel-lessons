@@ -15,10 +15,12 @@ class MoodSeeder extends Seeder
         DB::table('Moods')->delete();
 
         Mood::create([
+            'id' => 1,
             'mood_name' => 'Good',
         ]);
 
         Mood::create([
+            'id' =>2,
             'mood_name' => 'Bad',
         ]);
 

@@ -15,18 +15,22 @@ class CitySeeder extends Seeder
         DB::table('Cities')->delete();
 
         City::create([
+            'id' => 1,
             'city_name' => 'Vilnius',
         ]);
 
         City::create([
+            'id' => 2,
             'city_name' => 'Kaunas',
         ]);
 
         City::create([
+            'id' => 3,
             'city_name' => 'Klaipeda',
         ]);
 
         City::create([
+            'id' => 4,
             'city_name' => 'Kita',
         ]);
 

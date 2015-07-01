@@ -16,8 +16,8 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('name',100)->nullable();
             $table->string('email',60)->nullable();
-            $table->smallInteger('city');
-            $table->smallInteger('mood');
+            $table->integer('city')->unsigned();
+            $table->integer('mood')->unsigned();
             $table->text('content')->nullable();
             $table->string('slag')->nullable();
             $table->boolean('published')->default(false);

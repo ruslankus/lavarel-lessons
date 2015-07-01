@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         // $this->call(UserTableSeeder::class);
-        $this->call('PostsSeeder');
+
         $this->call('CitySeeder');
         $this->call('MoodSeeder');
-
+        $this->call('PostsSeeder');
         //Model::reguard();
     }
 }
@@ -41,7 +41,7 @@ class PostsSeeder extends Seeder {
             'slag' => 'first-feed',
             'published' => true,
             'created_at' => time(),
-            'mood' => 'Good'
+            'mood' => '1'
 
 
         ]);
@@ -55,7 +55,7 @@ class PostsSeeder extends Seeder {
             'slag' => 'second-feed',
             'published' => true,
             'created_at' => time(),
-            'mood' => 'Good'
+            'mood' => '2'
 
 
         ]);
@@ -70,7 +70,7 @@ class PostsSeeder extends Seeder {
             'slag' => 'third-feed',
             'published' => true,
             'created_at' => time(),
-            'mood' => 'Good'
+            'mood' => '1'
 
 
         ]);

@@ -32,6 +32,17 @@ class PostController extends Controller
         return view('post.index', ['post' => $post]);
     }
 
+
+    public function getIndex(){
+
+    }
+
+
+    public function getTest($id,Request $request){
+        dd($request);
+        echo "Controller Test = {$id}";
+    }
+
     /**
      * Show the form for creating a new resource.
      *
