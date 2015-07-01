@@ -21,10 +21,11 @@ class PostController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Post $postModel)
     {
 
-        $post = Post::latest('id')->limit(1)->get()->shift();
+        //$post = Post::latest('id')->limit(1)->get()->shift();
+        $post = $postModel->getLatestPost();
 
         //dd($post);
 
@@ -134,9 +135,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($id = null)
     {
-        //
+        echo "edit id = {$id}";
     }
 
     /**

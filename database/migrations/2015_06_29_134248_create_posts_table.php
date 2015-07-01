@@ -30,6 +30,11 @@ class CreatePostsTable extends Migration
             $table->foreign('city')->references('id')->on('cities');
             $table->foreign('mood')->references('id')->on('moods');
         });
+
+
+
+
+
     }
 
     /**

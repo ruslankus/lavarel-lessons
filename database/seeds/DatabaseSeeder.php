@@ -36,7 +36,7 @@ class PostsSeeder extends Seeder {
 
             'name' => 'First Name',
             'email' => 'test_mail1@test.lt',
-            'city' => 'City 1',
+            'city' => 1,
             'content' => 'First Feedbuck 24',
             'slag' => 'first-feed',
             'published' => true,
@@ -50,7 +50,7 @@ class PostsSeeder extends Seeder {
 
             'name' => 'Second Name',
             'email' => 'test_mail1@test.lt',
-            'city' => 'City 2',
+            'city' => 2,
             'content' => 'Second Feedbuck 24',
             'slag' => 'second-feed',
             'published' => true,
@@ -65,7 +65,7 @@ class PostsSeeder extends Seeder {
 
             'name' => 'Third Name',
             'email' => 'test_mail3@test.lt',
-            'city' => 'City 3',
+            'city' => 3,
             'content' => 'Third Feedbuck 24sdsds',
             'slag' => 'third-feed',
             'published' => true,

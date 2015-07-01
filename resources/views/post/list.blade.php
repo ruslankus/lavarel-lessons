@@ -18,7 +18,7 @@
             <p>Mood: {{$post->moods->mood_name }}</p>
             <p>City: {{$post->cities->city_name }}</p>
             <p>Date : {{$post->created_at}}</p>
-            <p>{{$post->content}}</p>
+            <p><?= nl2br($post->content) ?></p>
             <hr />
         </div>
         @endforeach

@@ -25,5 +25,11 @@ class CitySeeder extends Seeder
         City::create([
             'city_name' => 'Klaipeda',
         ]);
+
+        City::create([
+            'city_name' => 'Kita',
+        ]);
+
+
     }
 }

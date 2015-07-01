@@ -15,6 +15,8 @@
 
 get('/',['as' => 'post','uses' =>"PostController@index"]);
 
-//get('/create',['as' => 'post','uses' =>"PostController@create"]);
+get('/post/edit/{id}',['as' => 'post','uses' =>"PostController@edit"]);
 
-$router->resource('post','PostController');
+
+
+Route::resource('post','PostController');
