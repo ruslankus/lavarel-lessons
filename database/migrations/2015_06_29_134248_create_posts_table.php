@@ -23,6 +23,13 @@ class CreatePostsTable extends Migration
             $table->boolean('published')->default(false);
             $table->timestamps('published_at');
         });
+
+
+        Schema::table('posts', function(Blueprint $table)
+        {
+            $table->foreign('city')->references('id')->on('cities');
+            $table->foreign('mood')->references('id')->on('moods');
+        });
     }
 
     /**
