@@ -23,10 +23,13 @@ function boot(Router $router)
 
 get('/',['as' => 'post_main','uses' =>"PostController@index"]);
 
+get('/about',['as' => 'about', 'uses' => 'PageController@about']);
+
 get('/post/edit/{id}',['as' => 'post.edit','uses' =>"PostController@edit"]);
 
-Route::group(['prefix' => 'en'], function () {
-    Route::resource('post','PostController');
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('closed','ClosedController');
 });
 
 
@@ -35,5 +38,5 @@ Route::get('user/{id}', function ($id) {
 
 })->where('id', '[0-9]+');
 
-//Route::resource('post','PostController');
+Route::resource('post','PostController');
 

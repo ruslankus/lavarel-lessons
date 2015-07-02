@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Mood;
 use App\Models\City;
 use Illuminate\Http\Request;
 use App\Models;
@@ -58,7 +59,7 @@ class PostController extends Controller
             $citySelect[$obj->id] = $obj->city_name;
         }
 
-        $objMoods = Models\Mood::all();
+        $objMoods = Mood::all();
         foreach($objMoods as $obj){
             $moodSelect[$obj->id] = $obj->mood_name;
         }
@@ -93,7 +94,7 @@ class PostController extends Controller
                 $citySelect[$obj->id] = $obj->city_name;
             }
 
-            $objMoods = Models\Mood::all();
+            $objMoods = Mood::all();
             foreach($objMoods as $obj){
                 $moodSelect[$obj->id] = $obj->mood_name;
             }
