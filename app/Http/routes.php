@@ -29,7 +29,8 @@ get('/post/edit/{id}',['as' => 'post.edit','uses' =>"PostController@edit"]);
 
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::resource('closed','ClosedController');
+    Route::controller('/','ClosedController');
+
 });
 
 
