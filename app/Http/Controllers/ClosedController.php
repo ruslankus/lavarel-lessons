@@ -14,14 +14,14 @@ class ClosedController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function getIndex()
     {
         echo "admin index";
     }
 
 
-    public function all(){
-
+    public function getAll($one = null){
+        echo 'admin all + '. $one;
     }
 
     /**

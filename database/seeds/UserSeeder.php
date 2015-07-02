@@ -1,9 +1,9 @@
 <?php
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
-use App\Models\City;
+use App\Models\User;
 
-class CitySeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,28 +12,25 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Cities')->delete();
+        DB::table('Users')->delete();
 
-        City::create([
+        User::create([
             'id' => 1,
-            'city_name' => 'Vilnius',
+            'name' => 'user1',
+            'email' => 'test@test.ri'
         ]);
 
-        City::create([
+        User::create([
             'id' => 2,
-            'city_name' => 'Kaunas',
+            'name' => 'user2',
+            'email' => 'test@test.ri'
         ]);
 
-        City::create([
+        User::create([
             'id' => 3,
-            'city_name' => 'Klaipeda',
+            'name' => 'user3',
+            'email' => 'test@tes.ls'
         ]);
-
-        City::create([
-            'id' => 4,
-            'city_name' => 'Kita',
-        ]);
-
 
     }
 }

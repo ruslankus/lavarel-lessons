@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call('CitySeeder');
         $this->call('MoodSeeder');
         $this->call('PostsSeeder');
+        $this->call('UserSeeder');
+
         //Model::reguard();
     }
 }
