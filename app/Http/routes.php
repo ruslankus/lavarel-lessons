@@ -27,6 +27,9 @@ get('/about',['as' => 'about', 'uses' => 'PageController@about']);
 
 get('/post/edit/{id}',['as' => 'post.edit','uses' =>"PostController@edit"]);
 
+Route::get('articles','ArticleController@index');
+Route::get('articles/show/{id}','ArticleController@show');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Route::controller('/','ClosedController');

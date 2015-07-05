@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         User::create([
             'id' => 1,
             'name' => 'user1',
-            'email' => 'test@test.ri'
+            'email' => 'test@test.ru'
         ]);
 
         User::create([

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 
 class ClosedController extends Controller
@@ -21,7 +22,10 @@ class ClosedController extends Controller
 
 
     public function getAll($one = null){
-        echo 'admin all + '. $one;
+
+        $users = User::all();
+
+        return view('admin.list',compact('users'));
     }
 
     /**
