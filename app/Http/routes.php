@@ -27,14 +27,22 @@ get('/about',['as' => 'about', 'uses' => 'PageController@about']);
 
 get('/post/edit/{id}',['as' => 'post.edit','uses' =>"PostController@edit"]);
 
-Route::get('articles','ArticleController@index');
-Route::get('articles/show/{id}','ArticleController@show');
+//Route::get('articles','ArticleController@index');
+//Route::get('articles/show/{id}','ArticleController@show');
+//Route::get('articles/create',"ArticleController@create");
+//Route::post('articles','ArticleController@store');
 
+Route::resource('articles', 'ArticleController');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::controller('/','ClosedController');
 
 });
+
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController'
+]);
 
 
 
