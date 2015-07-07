@@ -19,35 +19,20 @@ function boot(Router $router)
     parent::boot($router);
 }
 
-//Route::get('/', 'PostController@index' );
-
 get('/',['as' => 'post_main','uses' =>"PostController@index"]);
 
 get('/about',['as' => 'about', 'uses' => 'PageController@about']);
 
 get('/post/edit/{id}',['as' => 'post.edit','uses' =>"PostController@edit"]);
 
-//Route::get('articles','ArticleController@index');
-//Route::get('articles/show/{id}','ArticleController@show');
-//Route::get('articles/create',"ArticleController@create");
-//Route::post('articles','ArticleController@store');
-
 Route::resource('articles', 'ArticleController');
 
-
 Route::controllers(['admin' => 'AdminController']);
-
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController'
 ]);
-
-
-
-Route::get('user/{id}', function ($id) {
-
-})->where('id', '[0-9]+');
 
 Route::resource('post','PostController');
 

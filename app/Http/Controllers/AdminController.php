@@ -3,20 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AdminFormRequest;
+use App\Http\Requests\AdminLoginRequest;
 use App\Models\Country;
 use App\Models\User;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
 
 
+    protected $redirectPath = '/admin';
+    protected $loginPath = '/admin/login';
+
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('admin',['except' => 'getLogin, postAuth']);
     }
 
     /**
@@ -64,6 +70,7 @@ class AdminController extends Controller
 
         return redirect()->action('AdminController@getIndex');
     }
+
 
 
     /**
@@ -120,5 +127,51 @@ class AdminController extends Controller
         }
 
         return redirect()->action('AdminController@getIndex');
+    }
+
+
+
+    public function getLogin(){
+
+        return view('admin.login');
+    }
+
+
+    public function getLogout(){
+        Auth::logout();
+
+        return redirect()->action('AdminController@getLogin');
+
+    }
+
+
+    /**
+     * @param AdminFormRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function postLogin(AdminLoginRequest $request)
+    {
+
+        dd($request);
+
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect($this->loginPath())
+            ->withInput($request->only('email', 'remember'))
+            ->withErrors([
+                'email' => $this->getFailedLoginMessage(),
+            ]);
+    }
+
+
+    public function postAuth(AdminLoginRequest $request)
+    {
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // Authentication passed...
+            return redirect()->intended('dashboard');
+        }
     }
 }
