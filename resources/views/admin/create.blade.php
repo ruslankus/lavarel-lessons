@@ -28,7 +28,10 @@
                         @endif
 
 
-                        <?=Form::open(['action' => 'AdminController@postStore','class' => 'form-horizontal', 'role' => 'form' ])?>
+                        <?=Form::open(['action' => 'AdminController@postStore',
+                                    'class' => 'form-horizontal',
+                                    'role' => 'form',
+                                    'files' => true])?>
 
                             <?php  Form::label('title', 'Title', ['class' => 'col-md-4 control-label']) ?>
                             <?php  Form::text('title',null,['class' => ' form-control'] ) ?>
@@ -56,6 +59,12 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <?=Form::label('image', 'Photo', ['class' => 'col-md-4 control-label']) ?>
+                                <div class="col-md-6">
+                                    <?=Form::file('image', null) ?>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <?=Form::label('password', 'Password', ['class' => 'col-md-4 control-label']) ?>

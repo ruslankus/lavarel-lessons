@@ -47,5 +47,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $query->where('show' ,'=', true);
     }
 
+    public function setPasswordAttribute($password){
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function photo(){
+        return $this->hasOne('App\Models\Photo');
+    }
+
 
 }

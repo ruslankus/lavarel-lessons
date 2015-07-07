@@ -25,9 +25,10 @@ class AdminFormRequest extends Request
     {
 
         $rules = [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'name'      => 'required|max:255',
+            'email'     => 'required|email|max:255|unique:users',
+            'password'  => 'required|confirmed|min:6',
+            'image'     => 'mimes:jpeg,bmp,png'
         ];
 
         if($this->method = 'PATCH'){

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdminFormRequest;
 use App\Http\Requests\AdminLoginRequest;
 use App\Models\Country;
+use App\Models\Photo;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -58,9 +59,17 @@ class AdminController extends Controller
      */
     public function postStore(AdminFormRequest $request)
     {
+
+
         $user = new User($request->all());
-        $user->password = bcrypt($request->input('password'));
-        if($user->save()){
+
+        //Generating image name
+        $imageName = uniqid(rand());
+
+        $image = new Photo();
+        $image->photo_name = $imageName;
+
+        if($image->users()->save($user)){
 
             Session::flash('message', 'User was saved');
 
@@ -101,7 +110,7 @@ class AdminController extends Controller
 
         $user = User::findOrFail($id);
         $user->update($request->all());
-        $user->password = bcrypt($request->input('password'));
+        //$user->password = bcrypt($request->input('password'));
 
         if($user->save()){
 
