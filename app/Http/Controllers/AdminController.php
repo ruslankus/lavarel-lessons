@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
-
+    use AuthenticatesUsers;
 
     protected $redirectPath = '/admin';
     protected $loginPath = '/admin/login';
 
     public function __construct(){
-        $this->middleware('admin',['except' => 'getLogin, postAuth']);
+        $this->middleware('admin',['except' => ['getLogin','postLogin','postAuth']]);
     }
 
     /**
@@ -133,6 +133,10 @@ class AdminController extends Controller
 
     public function getLogin(){
 
+        if(Auth::check()){
+            return redirect()->action('AdminController@getIndex');
+        }
+
         return view('admin.login');
     }
 
@@ -151,8 +155,7 @@ class AdminController extends Controller
      */
     public function postLogin(AdminLoginRequest $request)
     {
-
-        dd($request);
+        $credentials = $this->getCredentials($request);
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
             return redirect()->intended($this->redirectPath());
@@ -169,9 +172,19 @@ class AdminController extends Controller
     public function postAuth(AdminLoginRequest $request)
     {
 
+        $email = $request->input('email');
+        $password = $request->input('password');
+
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             // Authentication passed...
-            return redirect()->intended('dashboard');
+            return redirect()->intended($this->redirectPath);
         }
+
+        return redirect($this->loginPath())
+            ->withInput($request->only('email', 'remember'))
+            ->withErrors([
+                'email' => $this->getFailedLoginMessage(),
+            ]);
+
     }
 }

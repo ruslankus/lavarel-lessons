@@ -35,13 +35,11 @@ class AdminAuth
      */
     public function handle($request, Closure $next)
     {
-        
-
-        if ($this->auth->guest()  ) {
+        if ($this->auth->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('admin/login');
+                return redirect()->action('AdminController@getLogin');
             }
         }
 
