@@ -24,7 +24,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password','country_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -37,4 +37,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function articles(){
         return $this->hasMany('App\Models\Article');
     }
+
+    public function country(){
+        return $this->belongsTo('App\Models\Country', 'country_id','id');
+    }
+
+
+    public function scopeVisible($query){
+        $query->where('show' ,'=', true);
+    }
+
+
 }

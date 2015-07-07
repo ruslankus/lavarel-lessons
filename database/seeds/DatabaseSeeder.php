@@ -16,11 +16,12 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         // $this->call(UserTableSeeder::class);
-
+        $this->call('CountrySeeder');
         $this->call('CitySeeder');
         $this->call('MoodSeeder');
         $this->call('PostsSeeder');
         $this->call('UserSeeder');
+
 
         //Model::reguard();
     }
