@@ -21,6 +21,7 @@ class AdminController extends Controller
 
     protected $redirectPath = '/admin';
     protected $loginPath = '/admin/login';
+    protected $storagePath = '/public/upload/images/';
 
     public function __construct(){
         $this->middleware('admin',['except' => ['getLogin','postLogin','postAuth']]);
@@ -62,19 +63,37 @@ class AdminController extends Controller
 
 
         $user = new User($request->all());
+        //getting file
+        $file = $request->file('image');
+        if(!empty($file)){
 
-        //Generating image name
-        $imageName = uniqid(rand());
+            $extName = $file->getClientOriginalExtension();
+            //Generating image name
+            $imageName = uniqid(rand()) . ".{$extName}";
+            $image = new Photo();
+            $image->photo_name = $imageName;
+            $image->save();
+            //moving file
+            $fullPath = base_path() . $this->storagePath;
+            $file->move($fullPath, $imageName);
 
-        $image = new Photo();
-        $image->photo_name = $imageName;
+            //save all with relations
+            if($image->users()->save($user)){
+                Session::flash('message', 'User was saved');
 
-        if($image->users()->save($user)){
-
-            Session::flash('message', 'User was saved');
+            }else{
+                Session::flash('message', 'Save user failed');
+            }
 
         }else{
-            Session::flash('message', 'Save user failed');
+
+            if($user->save()){
+                Session::flash('message', 'User was saved');
+
+            }else{
+                Session::flash('message', 'Save user failed');
+            }
+
         }
 
         return redirect()->action('AdminController@getIndex');
@@ -109,16 +128,52 @@ class AdminController extends Controller
     public function patchUpdate($id, AdminFormRequest $request){
 
         $user = User::findOrFail($id);
-        $user->update($request->all());
-        //$user->password = bcrypt($request->input('password'));
+        $file = $request->file('image');
 
-        if($user->save()){
+        if(!empty($file))
+        {
+            //deleting old file
+            $objPhoto = Photo::find($user->photo_id);
+            $photoName = base_path() . $this->storagePath . $objPhoto->photo_name;
+            @unlink($photoName);
+            $objPhoto->delete();
 
-            Session::flash('message', 'User was updated');
+            //writing new file
+            $extName = $file->getClientOriginalExtension();
+
+            //Generating image name
+            $imageName = uniqid(rand()) . ".{$extName}";
+            $image = new Photo();
+            $image->photo_name = $imageName;
+            $image->save();
+
+            //moving file
+            $fullPath = base_path() . $this->storagePath;
+            $file->move($fullPath, $imageName);
+
+            //save all with relations
+            if($image->users()->save($user)){
+                Session::flash('message', 'User was saved');
+
+            }else{
+                Session::flash('message', 'Save user failed');
+            }
+
+
 
         }else{
-            Session::flash('message', 'Update user failed');
+            $user->update($request->all());
+
+            if($user->save()){
+
+                Session::flash('message', 'User was updated');
+
+            }else{
+                Session::flash('message', 'Update user failed');
+            }
         }
+
+
 
         return redirect()->action('AdminController@getIndex');
 
@@ -128,6 +183,15 @@ class AdminController extends Controller
     public function getDelete($id){
 
         $user = User::findOrFail($id);
+
+        if(!empty($user->photo_id)){
+            $photo = Photo::find($user->photo_id);
+            $imgName = $photo->photo_name;
+            $fullPath = base_path().$this->storagePath.$imgName;
+            //deleting
+            @unlink($fullPath);
+            $photo->delete();
+        }
 
         if($user->delete()){
             Session::flash('message', "User {$user->name} was deleted");
@@ -178,6 +242,10 @@ class AdminController extends Controller
     }
 
 
+    /**
+     * @param AdminLoginRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function postAuth(AdminLoginRequest $request)
     {
 
@@ -196,4 +264,4 @@ class AdminController extends Controller
             ]);
 
     }
-}
+}//end Class

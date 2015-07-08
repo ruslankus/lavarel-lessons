@@ -52,7 +52,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function photo(){
-        return $this->hasOne('App\Models\Photo');
+        return $this->belongsTo('App\Models\Photo','photo_id','id');
     }
 
 

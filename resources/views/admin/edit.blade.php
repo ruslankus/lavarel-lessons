@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create new User </div>
+                    <div class="panel-heading">Edit User <?=$user->name; ?> </div>
                     <div class="panel-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -29,7 +29,7 @@
 
 
                         <?=Form::model($user,['method' =>'PATCH','action' => ['AdminController@patchUpdate',$user->id],
-                                    'class' => 'form-horizontal', 'role' => 'form' ])?>
+                                    'class' => 'form-horizontal', 'role' => 'form', 'files' => true ])?>
 
                         <?php  Form::label('title', 'Title', ['class' => 'col-md-4 control-label']) ?>
                         <?php  Form::text('title',null,['class' => ' form-control'] ) ?>
@@ -58,6 +58,13 @@
                         </div>
 
                         <div class="form-group">
+                            <?=Form::label('image', 'Photo', ['class' => 'col-md-4 control-label']) ?>
+                            <div class="col-md-6">
+                                <?=Form::file('image', null) ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <?=Form::label('password', 'Password', ['class' => 'col-md-4 control-label']) ?>
                             <div class="col-md-6">
                                 <?=Form::input('password','password',null,['class' => 'form-control'] ) ?>
@@ -82,6 +89,19 @@
                         </div>
                         <?=Form::close(); ?>
                     </div>
+                </div>
+            </div>
+        </div><!--/end row -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>User photo</h4>
+                <div>
+                    @if(!empty($user->photo_id))
+                        <img src="/upload/images/<?=$user->photo->photo_name; ?>" class="img-rounded" height="150" width="150">
+                    @else()
+                        <img src="/upload/images/no-photo.jpg" class="img-rounded" height="150" width="150">
+                    @endif
                 </div>
             </div>
         </div>

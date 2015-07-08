@@ -21,15 +21,28 @@
         <table class="table">
         <tr>
             <th>id</th>
+            <th>photo</th>
             <th>name</th>
             <th>email</th>
             <th>Country </th>
             <th>actions</th>
         </tr>
 
-        @foreach($users as $user)
+        <?php foreach($users as $user):
+
+            if(!empty($user->photo_id)){
+                $imgName = "/upload/images/".$user->photo->photo_name;
+            }else{
+                $imgName = "/upload/images/no-photo.jpg";
+            }
+
+
+        ?>
         <tr>
             <td>{{$user->id}}</td>
+            <td>
+                <img src="<?=$imgName; ?>" class="img-circle" width="80" height="80" >
+            </td>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
             <td><?=$user->country->country_name; ?></td>
@@ -38,7 +51,7 @@
                 <a href="<?=action('AdminController@getDelete', ['id' => $user->id])?>" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
-        @endforeach
+        <?php endforeach?>
         </table>
 
 
