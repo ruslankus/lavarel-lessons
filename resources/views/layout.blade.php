@@ -5,6 +5,8 @@
 
     <body>
 
+
+
         @yield('content')
 
     </body>

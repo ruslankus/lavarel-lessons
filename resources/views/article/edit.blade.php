@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('artmain')
 
 @section('css')
     <!-- Latest compiled and minified CSS -->
@@ -7,7 +7,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="row">
         <h2>Edit <?=$article->title; ?></h2>
         {!! Form::model($article,['method' => 'PATCH','action' => ['ArticleController@update', $article->id ]]) !!}
 

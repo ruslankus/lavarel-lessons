@@ -129,6 +129,7 @@ class AdminController extends Controller
 
         $user = User::findOrFail($id);
         $file = $request->file('image');
+        $msg = 'Update user failed';
 
         if(!empty($file))
         {
@@ -153,29 +154,20 @@ class AdminController extends Controller
 
             //save all with relations
             if($image->users()->save($user)){
-                Session::flash('message', 'User was saved');
-
-            }else{
-                Session::flash('message', 'Save user failed');
+                $msg = 'User was update';
             }
-
-
 
         }else{
             $user->update($request->all());
 
             if($user->save()){
 
-                Session::flash('message', 'User was updated');
-
-            }else{
-                Session::flash('message', 'Update user failed');
+                $msg = 'User was updated';
             }
         }
 
-
-
-        return redirect()->action('AdminController@getIndex');
+        return redirect()->action('AdminController@getIndex')
+            ->with('message',$msg);
 
     }//patchUpdate
 

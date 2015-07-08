@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('artmain')
 
 @section('css')
     <!-- Latest compiled and minified CSS -->

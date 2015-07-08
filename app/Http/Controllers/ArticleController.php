@@ -48,11 +48,11 @@ class ArticleController extends Controller
         $article->published_at = Carbon::now();
         */
 
+        \Auth::user()->articles()->create($request->all());
 
-        $article = new Article($request->all());
-        \Auth::user()->articles()->save($article);
-
-        return redirect('articles');
+        return redirect('articles')->with([
+            'flash_message' => 'Your article has been created'
+        ]);
     }
 
 
