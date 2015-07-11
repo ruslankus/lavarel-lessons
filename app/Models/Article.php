@@ -38,6 +38,12 @@ class Article extends Model
     public function tags(){
         return $this->belongsToMany('App\Models\Tag');
     }
+
+    public function getTagListAttribute(){
+        $tags = $this->tags->lists('id');
+
+        return $tags;
+    }
 }
 
 

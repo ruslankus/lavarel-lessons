@@ -13,6 +13,7 @@
         <td>Mail</td>
         <td>
             <?=Form::text('mail',$request->input('mail'), ['class' => 'form-control']) ?>
+
             @if(!empty($messages))
                 <?=$messages->first('mail','<p>:message</p>')?>
             @endif

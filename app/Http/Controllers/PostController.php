@@ -34,15 +34,7 @@ class PostController extends Controller
     }
 
 
-    public function getIndex(){
 
-    }
-
-
-    public function getTest($id,Request $request){
-        dd($request);
-        echo "Controller Test = {$id}";
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -51,20 +43,8 @@ class PostController extends Controller
      */
     public function create(Request $request)
     {
-        $citySelect = [];
-        $moodSelect = [];
-
-        $objCities = City::all();
-        foreach($objCities as $obj){
-            $citySelect[$obj->id] = $obj->city_name;
-        }
-
-        $objMoods = Mood::all();
-        foreach($objMoods as $obj){
-            $moodSelect[$obj->id] = $obj->mood_name;
-        }
-
-
+        $citySelect = City::lists('city_name','id');
+        $moodSelect = Mood::lists('mood_name','id');
 
         return view('post.form', ['citySelect' => $citySelect,
             'moodSelect' => $moodSelect, 'request' => $request]);
@@ -86,18 +66,8 @@ class PostController extends Controller
 
         if($validator->fails()){
 
-            $citySelect = [];
-            $moodSelect = [];
-
-            $objCities = City::all();
-            foreach($objCities as $obj){
-                $citySelect[$obj->id] = $obj->city_name;
-            }
-
-            $objMoods = Mood::all();
-            foreach($objMoods as $obj){
-                $moodSelect[$obj->id] = $obj->mood_name;
-            }
+            $citySelect = City::lists('city_name','id');
+            $moodSelect = Mood::lists('mood_name','id');
 
             return view('post.form', ['messages' => $validator->errors(),
                 'citySelect' => $citySelect,
@@ -122,7 +92,7 @@ class PostController extends Controller
                 Session::flash('message', 'Add feeds failed');
             }
 
-            return redirect()->route('post');
+            return redirect()->action('PostController@index');
         }
 
     }
@@ -133,10 +103,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show()
+    public function show($id = null)
     {
         //$posts = Post::all();
         $posts = Post::latest('id')->paginate(2);
+
         //$posts = DB::table('posts')->paginate(2);
         return view('post.list', array('posts' => $posts));
     }

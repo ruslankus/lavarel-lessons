@@ -43,12 +43,7 @@ class AdminController extends Controller
      */
     public function getCreate(){
 
-        $countrySelect = [];
-
-        $objCountries = Country::all();
-        foreach($objCountries as $obj){
-            $countrySelect[$obj->id] = $obj->country_name;
-        }
+        $countrySelect = Country::lists('country_name','id');
 
         return view('admin.create',compact('countrySelect'));
     }
@@ -107,12 +102,7 @@ class AdminController extends Controller
      */
     public function getEdit($id){
 
-        $countrySelect = [];
-
-        $objCountries = Country::all();
-        foreach($objCountries as $obj){
-            $countrySelect[$obj->id] = $obj->country_name;
-        }
+        $countrySelect = Country::lists('country_name','id');
 
         $user = User::findOrFail($id);
 

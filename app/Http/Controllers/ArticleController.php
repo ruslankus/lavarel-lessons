@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Models\Tag;
 use Carbon\Carbon;
 
 
@@ -34,21 +35,18 @@ class ArticleController extends Controller
 
 
     public function create(){
-        return view('article.form');
+
+        $tags = Tag::lists('name','id');
+
+        return view('article.form',compact('tags'));
     }
 
     public function store(ArticleRequest $request){
 
-        /*
-        $input = Request::all();
+        $tagIds = $request->input('tag_list');
 
-        $article = new Article();
-        $article->title = $input['title'];
-        $article->body = $input['body'];
-        $article->published_at = Carbon::now();
-        */
-
-        \Auth::user()->articles()->create($request->all());
+        $article = \Auth::user()->articles()->create($request->all());
+        $article->tags()->attach($tagIds);
 
         return redirect('articles')->with([
             'flash_message' => 'Your article has been created'
@@ -58,7 +56,8 @@ class ArticleController extends Controller
 
     public function edit(Article $article){
 
-        return view('article.edit',compact('article'));
+        $tags = Tag::lists('name','id');
+        return view('article.edit',compact('article','tags'));
     }
 
 

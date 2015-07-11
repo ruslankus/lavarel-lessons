@@ -10,7 +10,7 @@
     @include('post._nav')
 
 <section id="form" class="container">
-    {!! Form::open(['route' => 'post.store'])  !!}
+    {!! Form::open(['action' => 'PostController@store'])  !!}
         @include('post._form')
     {!! Form::close() !!}
 </section>
