@@ -10,6 +10,12 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('tags','Tags:') !!}
+    {!! Form::select('tags',null,['class' => 'form-control']) !!}
+</div>
+
+
+<div class="form-group">
     <?=Form::label('published_at', 'Published on')?>
     <?=Form::input('date',"published_at",date("Y-m-d"),['class' => 'form-control'] ) ?>
 </div>

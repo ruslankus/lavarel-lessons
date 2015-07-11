@@ -48,7 +48,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function setPasswordAttribute($password){
-        $this->attributes['password'] = bcrypt($password);
+
+        $this->attributes['password'] = \Hash::make($password);
     }
 
     public function photo(){

@@ -19,27 +19,19 @@ class UserSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'super@admin.com',
             'country_id' => '1',
-            'password' => '$2y$10$.ub.I7c0oXkylEacfJ4gPOA/FUFtKMm6VFFz0VRjtjxun2W.z7cga',
+            'password' => '123456',
             'show' => '0'
         ]);
 
         User::create([
             'id' => 2,
             'name' => 'user2',
-            'email' => 'test@test.ri',
+            'email' => 'test@test.ru',
             'country_id' => '1',
-            'password' => '$2y$10$.ub.I7c0oXkylEacfJ4gPOA/FUFtKMm6VFFz0VRjtjxun2W.z7cga',
+            'password' => '123456',
             'show' => '1'
         ]);
 
-        User::create([
-            'id' => 3,
-            'name' => 'user3',
-            'email' => 'test@tes.ls',
-            'country_id' => '2',
-            'password' => '$2y$10$.ub.I7c0oXkylEacfJ4gPOA/FUFtKMm6VFFz0VRjtjxun2W.z7cga',
-            'show' => '1'
-        ]);
 
     }
 }
