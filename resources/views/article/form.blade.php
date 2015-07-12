@@ -3,6 +3,7 @@
 @section('css')
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
 @stop
 
 @section('content')
@@ -19,4 +20,8 @@
     @include("errors.articles._form-errors");
 
 
+@stop
+
+@section('js')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 @stop

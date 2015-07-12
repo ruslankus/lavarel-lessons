@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -13,18 +13,15 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="<?=action('AdminController@getIndex')?>">List users</a>
-                </li>
-                <li><a href="<?=action('AdminController@getCreate')?>">Create user</a></li>
+            <ul  class="nav navbar-nav" >
+                <li><a href="<?=action('ArticleController@index')?>">Article</a></li>
 
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
 
-                @include('admin._drop_nav')
-                
+                <li>{!! link_to_action('ArticleController@show',$latest->title,['id' => $latest->id]) !!}</li>
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
