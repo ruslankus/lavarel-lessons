@@ -24,7 +24,7 @@
             <ul class="nav navbar-nav navbar-right">
 
                 @include('admin._drop_nav')
-                
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -28,7 +30,14 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot($router);
 
-        $router->model('articles','App\Models\Article');
+        //$router->model('articles','App\Models\Article');
+        $router->bind('articles',function($id){
+            return Article::published()->findOrFail($id);
+        });
+
+        $router->bind('tag', function($name){
+            return Tag::where('name',$name)->firstOrFail();
+        });
     }
 
     /**

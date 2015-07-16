@@ -22,6 +22,12 @@ class Article extends Model
     }
 
 
+    public function getPublishedAtAttribute($date){
+
+        return (new Carbon($date))->format('Y-m-d');
+    }
+
+
     public function scopePublished($query){
         $query->where('published_at','<=',Carbon::now());
     }

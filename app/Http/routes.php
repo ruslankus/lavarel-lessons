@@ -29,6 +29,8 @@ Route::resource('articles', 'ArticleController');
 
 Route::controllers(['admin' => 'AdminController']);
 
+Route::get('tags/{tag}','TagsController@show');
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController'

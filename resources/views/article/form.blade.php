@@ -10,7 +10,7 @@
 
     <div class="container">
         <h2>Create new articles</h2>
-        <?=Form::open(['action' => 'ArticleController@store']);?>
+        <?=Form::model($article = new \App\Models\Article(),['action' => 'ArticleController@store']);?>
 
         @include("article.form._form",['buttonText' => 'Add article'])
 
