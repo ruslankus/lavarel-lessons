@@ -16,6 +16,7 @@ class ViewComposer extends ServiceProvider
     {
         $this->composeNavigation();
         $this->composeAdminInfo();
+        $this->composeLng();
     }
 
     /**
@@ -26,6 +27,11 @@ class ViewComposer extends ServiceProvider
     public function register()
     {
         //
+    }
+
+    public function composeLng()
+    {
+        view()->composer('lng._panel','App\Http\Composers\LngComposer@lngCompose' );
     }
 
     private function composeNavigation()

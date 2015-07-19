@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call('PostsSeeder');
         $this->call('UserSeeder');
         $this->call('CountrySeeder');
+        $this->call('LanguageSeeder');
 
 
         //Model::reguard();

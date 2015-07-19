@@ -27,6 +27,11 @@ get('/post/edit/{id}',['as' => 'post.edit','uses' =>"PostController@edit"]);
 
 Route::resource('articles', 'ArticleController');
 
+Route::group(['prefix' => '{lng}','middleware' => 'SetLng:prefix'],function(){
+
+    Route::controller('lang','LangController');
+});
+
 Route::controllers(['admin' => 'AdminController']);
 
 Route::get('tags/{tag}','TagsController@show');
